@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 typedef float real32;
 
@@ -27,6 +28,16 @@ operator-(vector2 a, vector2 b) {
   return result;
 }
 
+inline real32
+dot_product(vector2 a, vector2 b) {
+  return (a.x * b.x) + (a.y * b.y);
+}
+
+inline real32
+length(vector2 a) {
+  return sqrtf(dot_product(a, a));
+}
+
 void print_vector(const char name[], vector2 a) {
   printf("%s: [%.2f,%.2f]\n", name, a.x, a.y);
 }
@@ -39,5 +50,7 @@ int main() {
   print_vector("A+B", a+b);
   print_vector("A-B", a-b);
   print_vector("B-A", b-a);
+  printf("A.B: %.2f\n", dot_product(a,b));
+  printf("A length: %.2f\n", length(a));
   return 0;
 }
